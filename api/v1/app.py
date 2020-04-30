@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" API """
+""" The API """
 
 from flask import Flask, Blueprint, jsonify
 from models import storage
