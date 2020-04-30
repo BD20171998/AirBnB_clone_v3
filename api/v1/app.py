@@ -18,7 +18,7 @@ def tear_down(self):
 
 @app.errorhandler(404)
 def resource_not_found(e):
-    err_dict = {"Error": "Not Found"}
+    err_dict = {"error": "Not found"}
     return jsonify(err_dict), 404
 
 
