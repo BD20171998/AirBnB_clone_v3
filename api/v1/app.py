@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ API """
 
-from flask import Flask, Blueprint, jsonify, make_response
+from flask import Flask, Blueprint, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -17,9 +17,9 @@ def tear_down(self):
 
 
 @app.errorhandler(404)
-def page_not_found(e):
-    """Error 404"""
-    return make_response(jsonify({'error': 'Not found'}), 404)
+def resource_not_found(e):
+    err_dict = {"Error": "Not Found"}
+    return jsonify(err_dict), 404
 
 
 if __name__ == "__main__":
