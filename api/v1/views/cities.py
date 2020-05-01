@@ -21,9 +21,6 @@ def cities(state_id):
             if getattr(v, 'state_id') == state_id:
                 city_list.append(v.to_dict())
 
-        if city_list == [] or city_list is None:
-            abort(404)
-
         return jsonify(city_list)
 
     else:
