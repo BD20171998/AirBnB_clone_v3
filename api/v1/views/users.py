@@ -40,7 +40,7 @@ def user_delete(user_id):
         if del_user is None:
             abort(404)
         ret_del_user = {}
-        return jsonify(ret_del_user), return 200
+        return jsonify(ret_del_user), 200
 
     else:
         abort(404)
