@@ -78,4 +78,4 @@ def state_update(state_id):
     single_state.save()
     storage.save()
 
-    return jsonify(single_state.to_dict()), 200
+    return jsonify(single_state.to_dict())
