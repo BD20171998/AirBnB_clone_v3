@@ -18,17 +18,17 @@ def reviews(place_id):
     if place_id is not None:
         all_reviews = storage.all(Review)
 
+        for k, v in all_reviews.items():
+            if getattr(v, 'place_id') == place_id:
+                review_list.append(v.to_dict())
+
+        if review_list == [] or review_list is None:
+            abort(404)
+
+        return jsonify(review_list)
+
     else:
         abort(404)
-
-    for k, v in all_reviews.items():
-        if getattr(v, 'place_id') == place_id:
-            review_list.append(v.to_dict())
-
-    if review_list == [] or review_list is None:
-        abort(404)
-
-    return jsonify(review_list)
 
 
 @app_views.route("reviews/<review_id>", strict_slashes=False,
@@ -58,6 +58,9 @@ def review_delete(review_id):
 
         if del_review is None:
             abort(404)
+
+        del_review.delete()
+        storage.save()
 
         return {}
 
