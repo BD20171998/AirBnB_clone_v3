@@ -53,9 +53,11 @@ def user_add():
     if data is None:
         err_return = {"error": "Not a JSON"}
         return jsonify(err_return), 400
-    if "name" not in data:
-        err_return = {"error": "Missing name"}
+    elif "email" not in data:
+        err_return = {"error": "Missing email"}
         return jsonify(err_return), 400
+    elif "password" not in data:
+        return jsonify({"error": "Missing password"}), 400
     new = User(**data)
     storage.new(new)
     storage.save()
