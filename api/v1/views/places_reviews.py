@@ -11,7 +11,7 @@ from api.v1.views import app_views
 @app_views.route("/places/<place_id>/reviews", strict_slashes=False,
                  methods=['GET'])
 def reviews(place_id):
-    """Retreive all reviews of place using place_id"""
+    """Retrieve all reviews of place using place_id"""
     review_list = []
 
     if place_id is not None:
@@ -30,7 +30,7 @@ def reviews(place_id):
 @app_views.route("reviews/<review_id>", strict_slashes=False,
                  methods=['GET'])
 def review(review_id):
-    """Retreive review object"""
+    """Retrieve review object"""
     if review_id is not None:
         all_reviews = storage.all(Review)
 
