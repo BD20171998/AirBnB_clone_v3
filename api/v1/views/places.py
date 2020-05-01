@@ -16,7 +16,7 @@ def places(city_id):
     city_list = []
 
     if city_id is not None:
-        all_places = storage.all(Place).values()
+        all_places = storage.all(Place)
 
         for k, v in all_places.items():
             if getattr(v, 'city_id') == city_id:
