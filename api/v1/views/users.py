@@ -40,7 +40,7 @@ def user_delete(user_id):
         if del_user is None:
             abort(404)
         ret_del_user = {}
-        return jsonify(ret_del_user)
+        return jsonify(ret_del_user), return 200
 
     else:
         abort(404)
@@ -82,4 +82,4 @@ def user_update(user_id):
     single_user.save()
     storage.save()
 
-    return jsonify(single_user.to_dict())
+    return jsonify(single_user.to_dict()), 200
