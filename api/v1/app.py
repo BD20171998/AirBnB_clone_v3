@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-""" The API """
-
+"""
+ API
+"""
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -14,16 +15,16 @@ cors = CORS(app, resources={"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def tear_down(self):
-    """tear down method"""
+def end_session(response_or_exc):
+    """"Ends DB session  """
     storage.close()
 
 
 @app.errorhandler(404)
-def resource_not_found(e):
-    """Resource handler"""
-    err_dict = {"error": "Not found"}
-    return jsonify(err_dict), 404
+def page_not_found(error):
+    """  404  """
+    status = {"error": "Not found"}
+    return jsonify(status), 404
 
 
 if __name__ == "__main__":
