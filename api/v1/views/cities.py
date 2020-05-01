@@ -58,6 +58,8 @@ def city_delete(city_id):
         if del_city is None:
             abort(404)
 
+        del_city.delete()
+        storage.save()
         return {}
 
     else:
