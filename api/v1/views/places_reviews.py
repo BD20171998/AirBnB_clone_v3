@@ -17,6 +17,9 @@ def reviews(place_id):
     if place_id is not None:
         all_reviews = storage.all(Review)
 
+    else:
+        abort(404)
+
     for k, v in all_reviews.items():
         if getattr(v, 'place_id') == place_id:
             review_list.append(v.to_dict())
@@ -71,11 +74,11 @@ def review_add(review_id):
         err_return = {"error": "Not a JSON"}
         return jsonify(err_return), 400
 
-    if "user_id" not in data:
+    elif "user_id" not in data:
         err_return = {"error": "Missing user_id"}
         return jsonify(err_return), 400
 
-    if "text" not in data:
+    elif "text" not in data:
         err_return = {"error": "Missing text"}
         return jsonify(err_return), 400
 
