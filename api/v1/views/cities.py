@@ -17,6 +17,11 @@ def cities(state_id):
     if state_id is not None:
         all_cities = storage.all(City)
 
+        single_state = storage.get(State, state_id)
+
+        if single_state is None:
+            abort(404)
+
         for k, v in all_cities.items():
             if getattr(v, 'state_id') == state_id:
                 city_list.append(v.to_dict())
