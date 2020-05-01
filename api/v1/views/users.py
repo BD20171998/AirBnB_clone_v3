@@ -88,7 +88,7 @@ def user_update(user_id):
         setattr(single_user, 'last_name', data['last_name'])
 
     if 'password' in data:
-         setattr(single_user, 'password', data['password'])
+        setattr(single_user, 'password', data['password'])
 
     single_user.save()
     storage.save()
