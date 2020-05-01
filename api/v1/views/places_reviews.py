@@ -18,12 +18,14 @@ def reviews(place_id):
     if place_id is not None:
         all_reviews = storage.all(Review)
 
+        single_place = storage.get(Place, place_id)
+
+        if single_place is None:
+            abort(404)
+
         for k, v in all_reviews.items():
             if getattr(v, 'place_id') == place_id:
                 review_list.append(v.to_dict())
-
-        if review_list == [] or review_list is None:
-            abort(404)
 
         return jsonify(review_list)
 
@@ -36,7 +38,6 @@ def reviews(place_id):
 def review(review_id):
     """Retrieve review object"""
     if review_id is not None:
-        all_reviews = storage.all(Review)
 
         single_review = storage.get(Review, review_id)
 
