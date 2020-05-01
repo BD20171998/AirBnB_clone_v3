@@ -2,12 +2,11 @@
 """Reviews object view"""
 from flask import Flask, jsonify, request, Response
 from flask import abort
-from models import storage
-from api.v1.views import app_views
 from models.place import Place
 from models.review import Review
 from models.user import User
-
+from models import storage
+from api.v1.views import app_views
 
 @app_views.route("/places/<place_id>/reviews", strict_slashes=False,
                  methods=['GET'])
@@ -18,7 +17,7 @@ def reviews(place_id):
     if place_id is not None:
         all_reviews = storage.all(Review)
 
-    for k, v in all_reviws.items():
+    for k, v in all_reviews.items():
         if getattr(v, 'place_id') == place_id:
             review_list.append(v.to_dict())
 
@@ -26,9 +25,6 @@ def reviews(place_id):
         abort(404)
 
     return jsonify(review_list)
-
-    else:
-        abort(404)
 
 
 @app_views.route("reviews/<review_id>", strict_slashes=False,
