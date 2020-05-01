@@ -33,7 +33,7 @@ def places(city_id):
 
 @app_views.route("/places/<place_id>", strict_slashes=False,
                  methods=['GET'])
-def city(place_id):
+def city_r(place_id):
     """Retreive city object with city_id"""
     if place_id is not None:
 
@@ -50,7 +50,7 @@ def city(place_id):
 
 @app_views.route("/places/<place_id>", strict_slashes=False,
                  methods=['DELETE'])
-def city_delete(place_id):
+def place_delete(place_id):
     """Deletes a city object """
     if place_id is not None:
         del_place = storage.get("Place", place_id)
@@ -97,7 +97,7 @@ def place_add(place_id):
 
 
 @app_views.route("/places/<place_id>", strict_slashes=False, methods=['PUT'])
-def city_update(place_id):
+def place_update(place_id):
     """Update a city object"""
     data = request.get_json()
 
