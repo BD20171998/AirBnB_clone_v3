@@ -38,7 +38,7 @@ def state_delete(state_id):
         del_state = storage.get("State", state_id)
         if del_state is None:
             abort(404)
-        ret_del_state = del_state.to_dict()
+        ret_del_state = {}
         return jsonify(ret_del_state)
 
     else:
