@@ -39,6 +39,9 @@ def user_delete(user_id):
         del_user = storage.get("User", user_id)
         if del_user is None:
             abort(404)
+
+        del_user.delete()
+        storage.save()
         ret_del_user = {}
         return jsonify(ret_del_user), 200
 
@@ -78,7 +81,15 @@ def user_update(user_id):
     if single_user is None:
         abort(404)
 
-    setattr(single_user, 'name', data['name'])
+    if 'first_name' in data:
+        setattr(single_user, 'first_name', data['first_name'])
+
+    if 'last_name' in data:
+        setattr(single_user, 'last_name', data['last_name'])
+
+    if 'password' in data:
+         setattr(single_user, 'password', data['password'])
+
     single_user.save()
     storage.save()
 
