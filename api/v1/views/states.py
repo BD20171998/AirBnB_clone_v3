@@ -50,4 +50,3 @@ def state_update(state_id):
     single_state.save()
     storage.save()
     new = single_state.to_dict()
-:x
