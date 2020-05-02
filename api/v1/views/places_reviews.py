@@ -128,4 +128,4 @@ def review_update(review_id):
     single_review.save()
     storage.save()
 
-    return jsonify(single_review.to_dict()), 201
+    return jsonify(single_review.to_dict())
