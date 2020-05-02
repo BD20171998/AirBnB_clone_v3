@@ -61,6 +61,8 @@ def place_delete(place_id):
         if del_place is None:
             abort(404)
 
+        del_place.delete()
+        storage.save()
         return {}
 
     else:
