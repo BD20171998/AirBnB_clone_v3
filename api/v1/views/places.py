@@ -16,14 +16,17 @@ def places(city_id):
     city_list = []
 
     if city_id is not None:
+
+        single_city = storage.get(City, city_id)
+
+        if single_city is None:
+            abort(404)
+
         all_places = storage.all(Place)
 
         for k, v in all_places.items():
             if getattr(v, 'city_id') == city_id:
                 city_list.append(v.to_dict())
-
-        if city_list == [] or city_list is None:
-            abort(404)
 
         return jsonify(city_list)
 
@@ -37,7 +40,7 @@ def city_r(place_id):
     """Retreive city object with city_id"""
     if place_id is not None:
 
-        single_place = storage.get("Place", place_id)
+        single_place = storage.get(Place, place_id)
 
         if single_place is None:
             abort(404)
