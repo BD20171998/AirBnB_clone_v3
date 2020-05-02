@@ -71,7 +71,7 @@ def review_delete(review_id):
 
 @app_views.route("places/<place_id>/reviews", strict_slashes=False,
                  methods=['POST'])
-def review_add(review_id):
+def review_add(place_id):
     """Add a review object """
     data = request.get_json()
 
@@ -79,11 +79,11 @@ def review_add(review_id):
         err_return = {"error": "Not a JSON"}
         return jsonify(err_return), 400
 
-    elif "user_id" not in data:
+    if "user_id" not in data:
         err_return = {"error": "Missing user_id"}
         return jsonify(err_return), 400
 
-    elif "text" not in data:
+    if "text" not in data:
         err_return = {"error": "Missing text"}
         return jsonify(err_return), 400
 
