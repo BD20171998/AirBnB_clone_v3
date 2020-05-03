@@ -124,6 +124,30 @@ def place_update(place_id):
     if single_place is None:
         abort(404)
 
+    if 'description' in data:
+        setattr(single_place, 'description', data['description'])
+
+    if 'number_rooms' in data:
+        setattr(single_place, 'number_rooms', data['number_rooms'])
+
+    if 'number_bathrooms' in data:
+        setattr(single_place, 'number_bathrooms', data['number_bathrooms'])
+
+    if 'max_guest' in data:
+        setattr(single_place, 'max_guest', data['max_guest'])
+
+    if 'price_by_night' in data:
+        setattr(single_place, 'price_by_night', data['price_by_night'])
+
+    if 'latitude' in data:
+        setattr(single_place, 'latitude', data['latitude'])
+
+    if 'longitude' in data:
+        setattr(single_place, 'longitude', data['longitude'])
+
+    if 'amenity_ids' in data:
+        setattr(single_place, 'amenity_ids', data['amenity_ids'])
+
     setattr(single_place, 'name', data['name'])
     single_place.save()
     storage.save()
