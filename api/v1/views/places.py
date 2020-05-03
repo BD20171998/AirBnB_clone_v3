@@ -71,7 +71,7 @@ def place_delete(place_id):
 
 @app_views.route("/cities/<city_id>/places", strict_slashes=False,
                  methods=['POST'])
-def place_add(place_id):
+def place_add(city_id):
     """Adds a city object"""
     data = request.get_json()
 
@@ -83,7 +83,7 @@ def place_add(place_id):
         err_return = {"error": "Missing user_id"}
         return jsonify(err_return), 400
 
-    if place_id is not None:
+    if city_id is not None:
 
         single_place = storage.get("User", data["user_id"])
 
@@ -92,7 +92,7 @@ def place_add(place_id):
 
         new = Place(**data)
 
-        setattr(new, 'place_id', place_id)
+        setattr(new, 'city_id', city_id)
         storage.new(new)
         storage.save()
         return jsonify(new.to_dict()), 201
@@ -119,4 +119,4 @@ def place_update(place_id):
     single_place.save()
     storage.save()
 
-    return jsonify(single_place.to_dict()), 200
+    return jsonify(single_place.to_dict())
