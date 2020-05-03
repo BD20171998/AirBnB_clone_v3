@@ -83,11 +83,20 @@ def place_add(city_id):
         err_return = {"error": "Missing user_id"}
         return jsonify(err_return), 400
 
+    if "name" not in data:
+        err_return = {"error": "Missing name"}
+        return jsonify(err_return), 400
+
     if city_id is not None:
 
-        single_place = storage.get("User", data["user_id"])
+        single_user = storage.get("User", data["user_id"])
 
-        if single_place is None:
+        single_city = storage.get("City", city_id)
+
+        if single_user is None:
+            abort(404)
+
+        if single_city is None:
             abort(404)
 
         new = Place(**data)
